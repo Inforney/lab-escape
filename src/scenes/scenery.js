@@ -4,9 +4,12 @@
 import Phaser from 'phaser';
 import { BRAND } from '../config/brand.js';
 
-const W = 1280;
-const H = 720;
-const HOR = H * 0.52; // línea de horizonte (pared/piso)
+// Las medidas se toman de la escena: el ancho se adapta a la pantalla.
+function dims(scene) {
+  const W = scene.scale.width;
+  const H = scene.scale.height;
+  return { W, H, HOR: H * 0.52 }; // HOR = línea de horizonte (pared/piso)
+}
 
 function hx(s) {
   return parseInt(s.replace('#', ''), 16);
@@ -38,6 +41,7 @@ export function construirEscena(scene, sala) {
 
 // ══ Pared, piso, reflejo y niebla base ═══════════════════
 function paredYPiso({ scene, base, oscuro, acc }) {
+  const { W, H, HOR } = dims(scene);
   const g = scene.add.graphics().setDepth(0);
   // Pared con degradado + oscurecimiento hacia el techo
   g.fillGradientStyle(
@@ -92,6 +96,7 @@ function paredYPiso({ scene, base, oscuro, acc }) {
 
 // ══ Detalles de pared: pantallas, paneles, tubos, ventilas ══
 function detallesPared({ scene, base, acc }) {
+  const { W, HOR } = dims(scene);
   const g = scene.add.graphics().setDepth(1);
   // Grandes pantallas empotradas a los lados
   pantallaMuro(scene, g, 40, 70, 210, 150, acc);
@@ -151,6 +156,7 @@ function rejilla(g, x, y, w, h, acc) {
 
 // ══ Máquina / puerta focal (distinta por materia) ════════
 function maquinaFocal({ scene, sala, acc }) {
+  const { W, HOR } = dims(scene);
   const cx = W / 2;
   const topY = 66;
   const doorH = HOR - 20;
@@ -427,6 +433,7 @@ function focoFisica(scene, cx, topY, doorH, acc) {
 
 // ══ Mobiliario temático ══════════════════════════════════
 function mobiliario({ scene, sala, acc }) {
+  const { W, HOR } = dims(scene);
   switch (sala.id) {
     case 'lenguaje':
       sombraPiso(scene, 150, HOR + 6, 220);
@@ -722,6 +729,7 @@ function panelMonitores(scene, x, y, acc) {
 
 // ══ Atmósfera: haces de luz, niebla, partículas ══════════
 function atmosfera({ scene, acc }) {
+  const { W, H, HOR } = dims(scene);
   // Cono de luz cenital
   const g = scene.add.graphics().setDepth(2);
   g.fillStyle(0xffffff, 0.045);
@@ -771,6 +779,7 @@ function atmosfera({ scene, acc }) {
 
 // ══ LEDs parpadeantes ════════════════════════════════════
 function leds({ scene, acc }) {
+  const { W, HOR } = dims(scene);
   const pts = [
     [40, 28, 0x57c98b],
     [W - 40, 28, 0xe5484d],
@@ -788,6 +797,7 @@ function leds({ scene, acc }) {
 
 // ══ Overlays: grade de color + scanlines + viñeta + letterbox ══
 function overlays({ scene, acc }) {
+  const { W, H } = dims(scene);
   // Tinte de color global (cohesión)
   const grade = scene.add.graphics().setDepth(8);
   grade.fillStyle(acc, 0.05);

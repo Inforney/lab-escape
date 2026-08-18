@@ -53,10 +53,10 @@ button {
   justify-content: center;
 }
 
+/* Ojo: no poner max-width/max-height aquí. Phaser calcula el tamaño del
+   canvas y esas reglas lo deformaban al rotar el dispositivo. */
 #game canvas {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
 }
 
 /* ─── Overlay de puzzles ─────────────────────────────── */

@@ -6,9 +6,6 @@ import { SFX } from '../core/audio.js';
 import { abrirPuzzle, puzzleAbierto } from '../ui/modal.js';
 import { construirEscena } from './scenery.js';
 
-const W = 1280;
-const H = 720;
-
 function hexInt(str) {
   return parseInt(str.replace('#', ''), 16);
 }
@@ -34,6 +31,8 @@ export default class GameScene extends Phaser.Scene {
 
   // Bordes rojos que laten cuando queda poco tiempo (oculto al inicio).
   dibujarUrgencia() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const u = this.add.graphics().setDepth(9).setAlpha(0);
     const m = 180;
     const R = 0xe5484d;
@@ -50,6 +49,8 @@ export default class GameScene extends Phaser.Scene {
 
   // ─── Escena ──────────────────────────────────────────────
   dibujarEscena() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const key = 'bg_' + this.sala.id;
     if (this.sala.bg.image && this.textures.exists(key)) {
       // Fondo con imagen realista (si se agregó en /public/assets).
@@ -71,6 +72,8 @@ export default class GameScene extends Phaser.Scene {
 
   // ─── Hotspots (objetos interactivos que brillan y giran) ──
   dibujarHotspots() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     (this.sala.hotspots || []).forEach((hs) => {
       const x = hs.x * W;
       const y = hs.y * H;
@@ -177,6 +180,8 @@ export default class GameScene extends Phaser.Scene {
     SFX.doorSlide();
 
     // Estallido de luz desde la puerta focal + temblor.
+    const W = this.scale.width;
+    const H = this.scale.height;
     const cx = W / 2;
     const cy = H * 0.34;
     const luz = this.add.circle(cx, cy, 12, 0xffffff, 0.95).setDepth(15);
@@ -203,6 +208,8 @@ export default class GameScene extends Phaser.Scene {
 
   // ─── HUD ─────────────────────────────────────────────────
   dibujarHUD() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     // Título de sala
     this.add
       .text(20, 12, `${this.sala.emoji}  ${this.sala.nombre.toUpperCase()}`, {
@@ -350,6 +357,8 @@ export default class GameScene extends Phaser.Scene {
 
   // ─── Intro / toast ───────────────────────────────────────
   mostrarIntro() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const banner = this.add.container(W / 2, H / 2).setDepth(20);
     const g = this.add.graphics();
     g.fillStyle(0x000000, 0.82);
@@ -378,6 +387,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   toast(msg, color = '#fff', dur = 2200) {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const y = H - 120;
     const c = this.add.container(W / 2, y).setDepth(25);
     const g = this.add.graphics();

@@ -4,15 +4,14 @@ import { gameState } from '../core/state.js';
 import { SFX } from '../core/audio.js';
 import { TIEMPO_TOTAL_SEG, ROOMS } from '../config/rooms.js';
 
-const W = 1280;
-const H = 720;
-
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super('Menu');
   }
 
   create() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     // Fondo
     const g = this.add.graphics();
     g.fillGradientStyle(0x222c57, 0x222c57, 0x0d1226, 0x151b38, 1);

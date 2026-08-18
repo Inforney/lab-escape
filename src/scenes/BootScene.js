@@ -2,15 +2,14 @@ import Phaser from 'phaser';
 import { BRAND } from '../config/brand.js';
 import { ROOMS } from '../config/rooms.js';
 
-const W = 1280;
-const H = 720;
-
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super('Boot');
   }
 
   preload() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     // Fondo de carga
     this.add.rectangle(W / 2, H / 2, W, H, 0x151b38);
     this.add

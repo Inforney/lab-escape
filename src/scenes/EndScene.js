@@ -4,9 +4,6 @@ import { gameState } from '../core/state.js';
 import { SFX } from '../core/audio.js';
 import { TIEMPO_TOTAL_SEG, ROOMS } from '../config/rooms.js';
 
-const W = 1280;
-const H = 720;
-
 export default class EndScene extends Phaser.Scene {
   constructor() {
     super('End');
@@ -17,6 +14,8 @@ export default class EndScene extends Phaser.Scene {
   }
 
   create() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const g = this.add.graphics();
     if (this.gano) {
       g.fillGradientStyle(0x1b3a2a, 0x1b3a2a, 0x0b1622, 0x151b38, 1);
@@ -90,6 +89,8 @@ export default class EndScene extends Phaser.Scene {
   }
 
   confeti() {
+    const W = this.scale.width;
+    const H = this.scale.height;
     const cols = [0xc4a857, 0x4dd0e1, 0x57c98b, 0xe0c877, 0xffffff, 0xe5484d];
     for (let i = 0; i < 90; i++) {
       const x = Math.random() * W;
