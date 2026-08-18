@@ -1,0 +1,17 @@
+{
+  "name": "lab-escape",
+  "version": "1.0.0",
+  "description": "Lab Escape — Puzle multimateria de Escape Room (ISTPET)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host --port ${PORT:-4173}"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

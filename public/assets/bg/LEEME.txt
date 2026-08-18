@@ -1,0 +1,25 @@
+IMÁGENES DE FONDO REALISTAS (opcional)
+=======================================
+
+Cada sala puede usar una imagen de fondo realista. Por defecto el juego
+dibuja una escena propia por código (no necesita imágenes para funcionar).
+
+Para poner una imagen realista en una sala:
+
+1) Guarda la imagen aquí, por ejemplo:
+     public/assets/bg/lenguaje.jpg
+     public/assets/bg/quimica.jpg
+     public/assets/bg/biologia.jpg
+     public/assets/bg/matematicas.jpg
+   (formato JPG/PNG, ideal 1280x720 o 16:9)
+
+2) Abre  src/config/rooms.js  y en la sala correspondiente cambia:
+     bg: { image: null, ... }
+   por:
+     bg: { image: 'bg/lenguaje.jpg', ... }
+
+3) Vuelve a ejecutar el juego. La imagen se cargará automáticamente.
+
+Puedes generarlas con cualquier IA de imágenes (Gemini, DALL·E, etc.) usando
+prompts de "laboratorio futurista / aula abandonada, estilo cinematográfico,
+azul marino #222C57 con dorado #C4A857".
