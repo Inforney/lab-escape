@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BRAND } from '../config/brand.js';
 import { ROOMS } from '../config/rooms.js';
 import { gameState } from '../core/state.js';
+import { layout } from '../core/layout.js';
 import { SFX } from '../core/audio.js';
 import { abrirPuzzle, puzzleAbierto } from '../ui/modal.js';
 import { construirEscena } from './scenery.js';
@@ -167,6 +168,12 @@ export default class GameScene extends Phaser.Scene {
       },
       onClose: () => {
         this.input.enabled = true;
+        // Si la pantalla cambió de tamaño mientras el puzzle estaba abierto
+        // (por ejemplo al rotar el móvil), redibujamos la sala ahora.
+        if (layout.pendiente) {
+          layout.pendiente = false;
+          this.time.delayedCall(60, () => this.scene.restart());
+        }
       },
     });
   }

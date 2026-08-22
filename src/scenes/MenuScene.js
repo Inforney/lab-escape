@@ -86,9 +86,31 @@ export default class MenuScene extends Phaser.Scene {
       this.time.delayedCall(420, () => this.scene.start('Game'));
     });
 
+    // Botón pantalla completa (muy útil en móvil)
+    const txtFull = this.add
+      .text(W / 2 + 110, 560, '⛶ Pantalla completa', {
+        fontFamily: BRAND.fuenteTexto,
+        fontSize: '16px',
+        color: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.08)',
+        padding: { x: 14, y: 6 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+    txtFull.on('pointerdown', () => {
+      SFX.click();
+      if (this.scale.isFullscreen) {
+        this.scale.stopFullscreen();
+        txtFull.setText('⛶ Pantalla completa');
+      } else {
+        this.scale.startFullscreen();
+        txtFull.setText('⛶ Salir de pantalla completa');
+      }
+    });
+
     // Botón sonido
     this.txtSonido = this.add
-      .text(W / 2, 560, '🔊 Sonido: ON', {
+      .text(W / 2 - 110, 560, '🔊 Sonido: ON', {
         fontFamily: BRAND.fuenteTexto,
         fontSize: '16px',
         color: '#fff',
